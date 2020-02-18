@@ -26,7 +26,7 @@ def train_net(net,
               epochs=5,
               batch_size=1,
               lr=0.1,
-              val_percent=0.005,
+              val_percent=0.1,
               save_cp=True,
               img_scale=0.5):
 
@@ -34,7 +34,7 @@ def train_net(net,
     print(len(dataset))
     # for i in range(len(dataset.ids)):
     #   dataset.__getitem__(i)
-    n_val = 100#int(len(dataset) * val_percent)
+    n_val = int(len(dataset) * val_percent)
     n_train = len(dataset) - n_val
     train, val = random_split(dataset, [n_train, n_val])
     train_loader = DataLoader(train, batch_size=batch_size, shuffle=True, num_workers=1, pin_memory=True)
@@ -93,7 +93,7 @@ def train_net(net,
 
                 pbar.update(imgs.shape[0])
                 global_step += 1
-                if global_step % 2 == 0:# (len(dataset) // (10 * batch_size)) == 0:
+                if global_step % (len(dataset) // (10 * batch_size)) == 0:
                     val_score = 0
                     for batch in val_loader:
                       val_score = val_score + eval_net(net, batch, device, 0)/n_val
