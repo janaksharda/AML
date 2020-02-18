@@ -26,9 +26,6 @@ def eval_net(net, batch, device, n_val):
 
             for true_mask, pred in zip(true_masks, mask_pred):
                 pred = (pred > 0.5).float()
-                cv.imshow("hello",pred.cpu().data.numpy())
-                imshow(pred.cpu().data.numpy())
-                wevj.temp
                 if net.n_classes > 1:
                     tot += F.cross_entropy(pred.unsqueeze(dim=0), true_mask.unsqueeze(dim=0)).item()
                 else:
