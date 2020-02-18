@@ -60,7 +60,7 @@ def train_net(net,
     else:
         criterion = nn.BCEWithLogitsLoss()
 
-    for epoch in range(1):
+    for epoch in range(epochs):
         net.train()
         print(epochs)
         epoch_loss = 0
