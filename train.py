@@ -29,7 +29,9 @@ def train_net(net,
               val_percent=0.1,
               save_cp=True,
               img_scale=0.5):
-
+    lr = input()
+    momentum = input()
+    weight_decay = input()
     dataset = BasicDataset(dir_img, dir_mask, img_scale)
     print(len(dataset))
     # for i in range(len(dataset.ids)):
@@ -54,7 +56,7 @@ def train_net(net,
         Images scaling:  {img_scale}
     ''')
 
-    optimizer = optim.RMSprop(net.parameters(), lr=lr, weight_decay=1e-8)
+    optimizer = optim.RMSprop(net.parameters(), lr=lr, weight_decay=weight_decay,momentum=momentum)
     if net.n_classes > 1:
         criterion = nn.CrossEntropyLoss()
     else:
