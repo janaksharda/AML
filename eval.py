@@ -3,6 +3,7 @@ import torch.nn.functional as F
 from tqdm import tqdm
 from dice_loss import dice_coeff
 import cv2 as cv
+import torch.nn as nn
 
 def imshow(img):
     npimg = img.numpy()
@@ -21,8 +22,7 @@ def eval_net(net, batch, device, n_val):
             imgs = imgs.to(device=device, dtype=torch.float32)
             mask_type = torch.float32 if net.n_classes == 1 else torch.long
             true_masks = true_masks.to(device=device, dtype=mask_type)
-
-            mask_pred = net(imgs)
+            mask_pred = (net(imgs))
 
             for true_mask, pred in zip(true_masks, mask_pred):
                 pred = (pred > 0.5).float()
