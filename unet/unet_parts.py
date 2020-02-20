@@ -22,6 +22,12 @@ class DoubleConv(nn.Module):
     def forward(self, x):
         return self.double_conv(x)
 
+class Sigmoid1(nn.Module):
+    def __init__(self):
+        super().__init__()
+        self.Sigmoid1 = nn.Sigmoid()
+    def forward(self, x):
+        return self.Sigmoid1(x)
 
 class Down(nn.Module):
     """Downscaling with maxpool then double conv"""
