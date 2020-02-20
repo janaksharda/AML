@@ -71,6 +71,7 @@ class BasicDataset(Dataset):
         mask = mask.convert('L')
         # print(img.size)
         # print(mask.size)
+        img = img.resize((1000,700))
         mask = mask.resize(img.size)
         assert img.size == mask.size, \
             f'Image and mask {self.ids[i]} should be the same size, but are {img.size} and {mask.size}'
